@@ -5,13 +5,15 @@ import store from '../store';
 
 type Home = {
 	id: string,
-	heading: string
+	heading: string,
+	orgNo: string
 }
 
 const session = store.openSession();
 
 const {
-	heading
+	heading,
+	orgNo
 } = await session.load<Home>("4da46935-a693-4a1c-beef-3e4d3c2ee46f") || {};
 
 ---
@@ -20,12 +22,13 @@ const {
 	<main>
 		<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice" viewBox="194.351 239.986 639.362 269.263"><g paint-order="stroke"><path d="m0 0 20.007-48.474a679.534 679.534 0 0 1-43.046-1.903Zm-332.82-171.721C-243.336-107.18-93.341-70.4 29.896-72.436l.001-.001c121.733 1.666 270.883-34.686 360.502-99.284-56.63 53.254-140.437 93.379-238.404 111.943L96.835 78.969H-38.136c5.08-5.297 9.193-11.427 12.332-18.385L-81.185-57.415c-103.648-17.36-192.472-58.669-251.635-114.306" style="stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;fill:#fffacd;fill-rule:nonzero;opacity:1" transform="matrix(.88405 0 0 -.88405 488.58 309.799)"/><path d="m0 0 .132.064c56.606 39.319 130.835 69.293 215.349 85.56l-16.532-35.227c-10.912-23.468-23.094-42.676-36.545-57.621h85.87c-3.889 8.268-5.83 14.962-5.83 20.078 0 6.011 1.766 13.081 5.305 21.202l27.698 60.565c33.617 3.393 74.156 5.386 107.485 4.366 0 0 15.38-36.804 23.851-55.988 5.083-11.513 7.626-21.451 7.626-29.82 0-7.622-2.543-14.426-7.623-20.403h154.029C550.8 3.994 542.88 16.038 537.049 28.901l-21.978 55.284C596.549 67.62 668.122 38.242 723.086.064l.133-.064c-79.226 74.503-211.624 123.336-361.61 123.336C211.625 123.336 79.226 74.503 0 0" style="stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;fill:#fffacd;fill-rule:nonzero;opacity:1" transform="matrix(.88405 0 0 -.88405 194.35 502.863)"/></g></svg>
 		<Heading heading={heading} client:load />
-		<span>559296-1899</span>
+		<span is="str-span" data-field="orgNo">{orgNo}</span>
 	</main>
 </Layout>
 
 <style>
 	main {
+		height: 500px;
     width: 50vw;
 		& svg {
 			width: 40%;
