@@ -17,15 +17,15 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      STRIFE_CERTIFICATE: ${{ secrets.STRIFE_CERTIFICATE }}
-      STRIFE_CERTIFICATE_PASSWORD: ${{ secrets.STRIFE_CERTIFICATE_PASSWORD }}
-      STRIFE_DATABASE_URLS: ${{ secrets.STRIFE_DATABASE_URLS }}
-      STRIFE_DATABASE: ${{ secrets.STRIFE_DATABASE }}
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
       - name: Install, build, and upload your site
+        env:
+          STRIFE_CERTIFICATE: ${{ secrets.STRIFE_CERTIFICATE }}
+          STRIFE_CERTIFICATE_PASSWORD: ${{ secrets.STRIFE_CERTIFICATE_PASSWORD }}
+          STRIFE_DATABASE_URLS: ${{ secrets.STRIFE_DATABASE_URLS }}
+          STRIFE_DATABASE: ${{ secrets.STRIFE_DATABASE }}
         uses: withastro/action@v3
         # with:
           # path: . # The root location of your Astro project inside the repository. (optional)
@@ -35,15 +35,15 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    env:
-      STRIFE_CERTIFICATE: ${{ secrets.STRIFE_CERTIFICATE }}
-      STRIFE_CERTIFICATE_PASSWORD: ${{ secrets.STRIFE_CERTIFICATE_PASSWORD }}
-      STRIFE_DATABASE_URLS: ${{ secrets.STRIFE_DATABASE_URLS }}
-      STRIFE_DATABASE: ${{ secrets.STRIFE_DATABASE }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
+        env:
+          STRIFE_CERTIFICATE: ${{ secrets.STRIFE_CERTIFICATE }}
+          STRIFE_CERTIFICATE_PASSWORD: ${{ secrets.STRIFE_CERTIFICATE_PASSWORD }}
+          STRIFE_DATABASE_URLS: ${{ secrets.STRIFE_DATABASE_URLS }}
+          STRIFE_DATABASE: ${{ secrets.STRIFE_DATABASE }}
         id: deployment
         uses: actions/deploy-pages@v4
