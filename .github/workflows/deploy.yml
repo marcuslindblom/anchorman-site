@@ -17,6 +17,11 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      STRIFE_CERTIFICATE: ${{ secrets.STRIFE_CERTIFICATE }}
+      STRIFE_CERTIFICATE_PASSWORD: ${{ secrets.STRIFE_CERTIFICATE_PASSWORD }}
+      STRIFE_DATABASE_URLS: ${{ secrets.STRIFE_DATABASE_URLS }}
+      STRIFE_DATABASE: ${{ secrets.STRIFE_DATABASE }}
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
@@ -30,6 +35,11 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    env:
+      STRIFE_CERTIFICATE: ${{ secrets.STRIFE_CERTIFICATE }}
+      STRIFE_CERTIFICATE_PASSWORD: ${{ secrets.STRIFE_CERTIFICATE_PASSWORD }}
+      STRIFE_DATABASE_URLS: ${{ secrets.STRIFE_DATABASE_URLS }}
+      STRIFE_DATABASE: ${{ secrets.STRIFE_DATABASE }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -37,8 +47,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        env:
-          STRIFE_CERTIFICATE: ${{ secrets.STRIFE_CERTIFICATE }}
-          STRIFE_CERTIFICATE_PASSWORD: ${{ secrets.STRIFE_CERTIFICATE_PASSWORD }}
-          STRIFE_DATABASE_URLS: ${{ secrets.STRIFE_DATABASE_URLS }}
-          STRIFE_DATABASE: ${{ secrets.STRIFE_DATABASE }}
